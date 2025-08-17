@@ -1,0 +1,15 @@
+document.querySelectorAll(".ramo").forEach(ramo => {
+  ramo.addEventListener("click", () => {
+    if (ramo.classList.contains("locked")) return;
+
+    ramo.classList.toggle("approved");
+
+    let unlocks = ramo.getAttribute("data-unlock");
+    if (unlocks) {
+      unlocks.split(",").forEach(id => {
+        let next = document.querySelector(`.ramo[data-id='${id}']`);
+        if (next) next.classList.remove("locked");
+      });
+    }
+  });
+});
